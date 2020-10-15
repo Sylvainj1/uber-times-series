@@ -11,5 +11,10 @@ body {
   bottom: 0;
   /* right: 10%; */
   width: 100%;
-  /* height: 50%; */
+  height: 50%;
+}
+
+.predict_button {
+    position: relative;
+    margin-top: 600px;
 }
