@@ -2,6 +2,7 @@ import numpy as np
 import pickle
 from flask import Flask, request, render_template
 import json
+import pandas as pd
 
 
 app = Flask(__name__)
@@ -11,15 +12,27 @@ app.config.from_envvar('APP_CONFIG_FILE', silent=True)
 MAPBOX_ACCESS_KEY = app.config['MAPBOX_ACCESS_KEY']
 
 
-pickup_json = {
-    "type": "FeatureCollection",
-    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-    "features": [
-    { "type": "Feature", "properties": { "id": "ak16994521", "mag": 2.3, "time": 1507425650893, "felt": None, "tsunami": 1 }, "geometry": { "type": "Point", "coordinates": [ -73.968565, 40.779897, 0.0 ] } },
-    { "type": "Feature", "properties": { "id": "ak16994521", "mag": 2.3, "time": 1507425650893, "felt": None, "tsunami": 1 }, "geometry": { "type": "Point", "coordinates": [ -73.968565, 40.779897, 0.0 ] } },
-    { "type": "Feature", "properties": { "id": "ak16994521", "mag": 2.3, "time": 1507425650893, "felt": None, "tsunami": 1 }, "geometry": { "type": "Point", "coordinates": [ -73.865429, 40.837049, 0.0 ] } },
-    { "type": "Feature", "properties": { "id": "ak16994521", "mag": 2.3, "time": 1507425650893, "felt": None, "tsunami": 1 }, "geometry": { "type": "Point", "coordinates": [ -73.865429, 40.837049, 0.0 ] } },
-    ]}
+def create_pickups_cluster():
+    schema = {
+        "type": "FeatureCollection",
+        "crs": {"type": "name", "properties": {"name": "pickups_json"}},
+        "features": []
+    }
+
+    populate_feature = []
+
+    for i in range(0, 5300):
+        feature = {"type": "Feature", "properties": {"id": "Manhattan", "time": 1507425650893},
+                   "geometry": {"type": "Point", "coordinates": [-73.968565, 40.779897, 0.0]}}
+        populate_feature.append(feature)
+
+    schema['features'] = populate_feature
+    return schema
+
+pickup_json = create_pickups_cluster()
+
+model_test = pickle.load(open('../models/model_lgbm.pkl','rb'))
+
 
 @app.route('/')
 def mapbox_js():
@@ -28,6 +41,19 @@ def mapbox_js():
         ACCESS_KEY=MAPBOX_ACCESS_KEY,
         pickup_data=json.dumps(pickup_json)
     )
+
+@app.route('/predict', methods = ['POST'])
+def predict():
+    #en fait ce qu'il faudra faire, c'est laisser à l'utilisateur choisir l'horizon, ou bien la date
+    # genre 1h, 2h etc...
+    # recuperer cet input ici 
+    #et choper la valeur en conséquence
+    # par exemple ici au lieu d'avoir prediction[0] pour 1h apres,
+    # #si l'utilisateur veut 2h apres ca sera prediction[1] etc...
+    
+    features = pd.read_csv('../X_test_csv.csv')
+    predictions = model_test.predict(features)
+
 
 if __name__ == '__main__':
     app.run()
