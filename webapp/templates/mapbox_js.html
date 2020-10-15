@@ -15,15 +15,10 @@
     <div id="map"></div>
   </div>
   
-  <script>
-    mapboxgl.accessToken = '{{ACCESS_KEY}}';
-    var map = new mapboxgl.Map({
-      container: 'map', // container id
-      style: 'mapbox://styles/mapbox/streets-v11', // style URL
-      center: [-73.968565, 40.779897], // starting position [lng, lat]
-      zoom: 12 // starting zoom
-    });
-  </script>
+  <script type="text/javascript" src="{{ url_for('static', filename='mapbox_action.js') }}" ></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='testload.js') }}" ></script>
+  <script type="text/javascript">var myData = {{pickup_data|safe}};
+    </script>
 
 </body>
 
