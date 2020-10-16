@@ -28,7 +28,7 @@
 
 	<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
   	<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
-  	<link rel="stylesheet" href="{{ url_for('static', filename='main-style.css')}}" />
+  	<link rel="stylesheet" href="{{ url_for('static', filename='css/main-style.css')}}" />
 </head>
 
 <body>
@@ -66,9 +66,9 @@
 	<!-- start banner Area -->
 	<section class="home-banner-area" style="background: url({{ url_for('static', filename='img/home-banner-bg.jpg')}}) center;">
 		<div class="container">
-			<!-- <div class="map-container">
+			<div class="map-container">
 				<div id="map"></div>
-			  </div> -->
+			  </div>
 			
 			  <!-- <div class="predict_button">
 				<form action="{{ url_for('predict')}}"method="post">
@@ -77,9 +77,6 @@
 			  </div> -->
 			<div class="row fullscreen d-flex align-items-center justify-content-between">
 				<div class="home-banner-content col-lg-6 col-md-6">
-					<h1>
-						Ici <br> La map mapbox
-					</h1>
 				</div>
 			</div>
 		</div>
@@ -297,7 +294,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<!-- </footer> -->
 	<!-- End Footer Area -->
 
-	<script type="text/javascript" src="{{ url_for('static', filename='mapbox_action.js') }}" ></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/mapbox_action.js') }}" ></script>
   	<script type="text/javascript">var pickups_data = {{pickup_data|safe}};</script>
 
 	<script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
