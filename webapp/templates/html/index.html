@@ -22,9 +22,12 @@
 			CSS
 			============================================= -->
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/linearicons.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/nice-select.css')}}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css')}}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/select-css.css')}}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+	
 
 	<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
   	<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
@@ -70,11 +73,6 @@
 				<div id="map"></div>
 			  </div>
 			
-			  <!-- <div class="predict_button">
-				<form action="{{ url_for('predict')}}"method="post">
-					<button type="submit" class="btn btn-primary btn-block btn-large">predire manhattan 1h apres</button>
-				</form>
-			  </div> -->
 			<div class="row fullscreen d-flex align-items-center justify-content-between">
 				<div class="home-banner-content col-lg-6 col-md-6">
 				</div>
@@ -82,6 +80,23 @@
 		</div>
 	</section>
 	<!-- End banner Area -->
+
+	<section class="fact-area">
+		<div class="container">
+				<div class="row align-items-center">
+			<select id="mounth">
+				<option value="arima">ARIMA</option>
+				<option value="rnn">RNN</option>
+				<option value="lgbm">LGBM</option>
+			</select> 
+			<div class="predict_button">
+				<form action="{{ url_for('predict')}}"method="post">
+					<button type="submit" class="btn btn-primary btn-block btn-large">predire manhattan 1h apres</button>
+				</form>
+			  </div>
+			  </div>
+		</div>
+	</section>
 
 	<!-- Start fact Area -->
 	<section class="fact-area">
@@ -295,9 +310,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<!-- End Footer Area -->
 
 	<script type="text/javascript" src="{{ url_for('static', filename='js/mapbox_action.js') }}" ></script>
-  	<script type="text/javascript">var pickups_data = {{pickup_data|safe}};</script>
+	  <script type="text/javascript">var pickups_data = {{pickup_data|safe}};</script>
+	  
 
 	<script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/select-function.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/tilt.jquery.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/easing.min.js') }}"></script>

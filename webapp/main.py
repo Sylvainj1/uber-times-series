@@ -58,7 +58,7 @@ def predict():
     json_to_pass = create_pickups_cluster(cluster_value)
 
     return render_template(
-        'mapbox_js.html',
+        'html/index.html',
         ACCESS_KEY=MAPBOX_ACCESS_KEY,
         pickup_data=json.dumps(json_to_pass)
     )

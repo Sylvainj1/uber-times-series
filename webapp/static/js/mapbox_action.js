@@ -6,7 +6,7 @@ var map = new mapboxgl.Map({
   container: "map", // container id
   style: "mapbox://styles/mapbox/dark-v10", // style URL
   center: [-73.968565, 40.779897], // starting position [lng, lat]
-  zoom: 12, // starting zoom
+  zoom: 11, // starting zoom
 });
 
 map.on("load", function () {
