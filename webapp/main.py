@@ -31,7 +31,10 @@ def predict():
     # par exemple ici au lieu d'avoir predictions[0] pour 1h apres,
     # #si l'utilisateur veut 2h apres ca sera predictions[1] etc...
 
-    model = WebModel('model_lgbm')
+    selected_model = request.form.get('model_select')
+    print(str(selected_model))
+
+    model = WebModel(selected_model)
     cluster_data = model.create_json()
 
     return render_template(

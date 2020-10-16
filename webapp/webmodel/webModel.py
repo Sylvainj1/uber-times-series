@@ -15,8 +15,13 @@ class WebModel:
     def forecast_pickups(self):
         features = pd.read_csv('../X_test_csv.csv')
         model = self.load_model()
-        predictions = model.predict(features)
-        return predictions
+        if self.model == 'model_sarimax':
+            predictions = model.forecast(len(features))
+            return predictions
+        else:
+            predictions = model.predict(features)
+            return predictions
+
 
     def create_pickups_cluster(self,prediction_number=0):
         schema = {

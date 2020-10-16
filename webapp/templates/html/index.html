@@ -27,11 +27,11 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/select-css.css')}}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
-	
+
 
 	<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
-  	<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
-  	<link rel="stylesheet" href="{{ url_for('static', filename='css/main-style.css')}}" />
+	<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main-style.css')}}" />
 </head>
 
 <body>
@@ -40,7 +40,8 @@
 		<div class="container main-menu">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="index.html"><img src="{{ url_for('static', filename='img/logo.png')}}" alt="" title="" /></a>
+					<a href="index.html"><img src="{{ url_for('static', filename='img/logo.png')}}" alt=""
+							title="" /></a>
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
@@ -67,12 +68,13 @@
 	<!-- end header Area -->
 
 	<!-- start banner Area -->
-	<section class="home-banner-area" style="background: url({{ url_for('static', filename='img/home-banner-bg.jpg')}}) center;">
+	<section class="home-banner-area"
+		style="background: url({{ url_for('static', filename='img/home-banner-bg.jpg')}}) center;">
 		<div class="container">
 			<div class="map-container">
 				<div id="map"></div>
-			  </div>
-			
+			</div>
+
 			<div class="row fullscreen d-flex align-items-center justify-content-between">
 				<div class="home-banner-content col-lg-6 col-md-6">
 				</div>
@@ -83,18 +85,19 @@
 
 	<section class="fact-area">
 		<div class="container">
-				<div class="row align-items-center">
-			<select id="mounth">
-				<option value="arima">ARIMA</option>
-				<option value="rnn">RNN</option>
-				<option value="lgbm">LGBM</option>
-			</select> 
-			<div class="predict_button">
-				<form action="{{ url_for('predict')}}"method="post">
-					<button type="submit" class="btn btn-primary btn-block btn-large">predire manhattan 1h apres</button>
+			<div class="row align-items-center">
+				<form action="{{ url_for('predict')}}" method="POST">
+				<select name="model_select" id="mounth">
+					<option value="model_sarimax">ARIMA</option>
+					<option value="rnn">RNN</option>
+					<option value="model_lgbm">LGBM</option>
+				</select>
+				<div class="predict_button">
+					<button type="submit" class="btn btn-primary btn-block btn-large">predire manhattan 1h
+						apres</button>
+				</div>
 				</form>
-			  </div>
-			  </div>
+			</div>
 		</div>
 	</section>
 
@@ -149,7 +152,8 @@
 							<h3>Expert Technicians</h3>
 						</a>
 						<p>
-							Usage of the Internet is becoming more common due to rapid advancement of technology and power.
+							Usage of the Internet is becoming more common due to rapid advancement of technology and
+							power.
 						</p>
 					</div>
 				</div>
@@ -160,7 +164,8 @@
 							<h3>Professional Service</h3>
 						</a>
 						<p>
-							Usage of the Internet is becoming more common due to rapid advancement of technology and power.
+							Usage of the Internet is becoming more common due to rapid advancement of technology and
+							power.
 						</p>
 					</div>
 				</div>
@@ -171,7 +176,8 @@
 							<h3>Great Support</h3>
 						</a>
 						<p>
-							Usage of the Internet is becoming more common due to rapid advancement of technology and power.
+							Usage of the Internet is becoming more common due to rapid advancement of technology and
+							power.
 						</p>
 					</div>
 				</div>
@@ -195,7 +201,8 @@
 						si on l'utilise pas
 					</h1>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+						labore et dolore
 						magna aliqua.Ut
 						enim ad minim. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
 					</p>
@@ -269,7 +276,7 @@
 						<div class="top-sec d-flex justify-content-between">
 							<div class="top-left">
 								<h4>LightGBM</h4>
-								<p>Méthodes de gradient  <br>boosting</p>
+								<p>Méthodes de gradient <br>boosting</p>
 							</div>
 							<div class="top-right">
 								<h1>9.71%</h1>
@@ -294,24 +301,31 @@
 
 	<!-- Start Footer Area -->
 	<!-- <footer class="footer-area section-gap"> -->
-		<div class="container">
-			<div class="footer-bottom row align-items-center">
-				<p class="footer-text m-0 col-lg-6 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-				<div class="col-lg-6 col-md-6 social-link">
-					<div class="download-button d-flex flex-row justify-content-end">
-						<p>machine learning model, prediction, mapbox integration made by <a href="https://github.com/jeremySrgt" target="_blank">Jérémy Surget</a> & <a href="https://github.com/Sylvainj1" target="_blank">Sylvain Jiang</a></p>
-					</div>
+	<div class="container">
+		<div class="footer-bottom row align-items-center">
+			<p class="footer-text m-0 col-lg-6 col-md-12">
+				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				Copyright &copy;
+				<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+				with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+					target="_blank">Colorlib</a>
+				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			</p>
+			<div class="col-lg-6 col-md-6 social-link">
+				<div class="download-button d-flex flex-row justify-content-end">
+					<p>machine learning model, prediction, mapbox integration made by <a
+							href="https://github.com/jeremySrgt" target="_blank">Jérémy Surget</a> & <a
+							href="https://github.com/Sylvainj1" target="_blank">Sylvain Jiang</a></p>
 				</div>
 			</div>
 		</div>
+	</div>
 	<!-- </footer> -->
 	<!-- End Footer Area -->
 
-	<script type="text/javascript" src="{{ url_for('static', filename='js/mapbox_action.js') }}" ></script>
-	  <script type="text/javascript">var pickups_data = {{pickup_data|safe}};</script>
-	  
+	<script type="text/javascript" src="{{ url_for('static', filename='js/mapbox_action.js') }}"></script>
+	<script type="text/javascript">var pickups_data = {{ pickup_data| safe}};</script>
+
 
 	<script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/select-function.js') }}"></script>
