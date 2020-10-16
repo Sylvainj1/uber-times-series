@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Favicon-->
+	<link rel="shortcut icon" href="{{ url_for('static', filename='img/fav.png')}}">
+	<!-- Author Meta -->
+	<meta name="author" content="codepixer">
+	<!-- Meta Description -->
+	<meta name="description" content="">
+	<!-- Meta Keyword -->
+	<meta name="keywords" content="">
+	<!-- meta character set -->
+	<meta charset="UTF-8">
+	<!-- Site Title -->
+	<title>Uber forecast</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,600|Roboto:400,400i,500" rel="stylesheet">
+	<!--
+			CSS
+			============================================= -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/linearicons.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css')}}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+
+	<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+  	<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+  	<link rel="stylesheet" href="{{ url_for('static', filename='main-style.css')}}" />
+</head>
+
+<body>
+	<!-- start header Area -->
+	<header id="header">
+		<div class="container main-menu">
+			<div class="row align-items-center justify-content-between d-flex">
+				<div id="logo">
+					<a href="index.html"><img src="{{ url_for('static', filename='img/logo.png')}}" alt="" title="" /></a>
+				</div>
+				<nav id="nav-menu-container">
+					<ul class="nav-menu">
+						<li class="menu-active"><a href="index.html">Home</a></li>
+						<li><a href="about.html">About</a></li>
+						<li><a href="pricing.html">Pricing</a></li>
+						<li class="menu-has-children"><a href="">Pages</a>
+							<ul>
+								<li><a href="elements.html">Elements</a></li>
+							</ul>
+						</li>
+						<li class="menu-has-children"><a href="">Blog</a>
+							<ul>
+								<li><a href="blog-home.html">Blog Home</a></li>
+								<li><a href="blog-single.html">Blog Single</a></li>
+							</ul>
+						</li>
+						<li><a href="contact.html">Contact</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<!-- end header Area -->
+
+	<!-- start banner Area -->
+	<section class="home-banner-area" style="background: url({{ url_for('static', filename='img/home-banner-bg.jpg')}}) center;">
+		<div class="container">
+			<!-- <div class="map-container">
+				<div id="map"></div>
+			  </div> -->
+			
+			  <!-- <div class="predict_button">
+				<form action="{{ url_for('predict')}}"method="post">
+					<button type="submit" class="btn btn-primary btn-block btn-large">predire manhattan 1h apres</button>
+				</form>
+			  </div> -->
+			<div class="row fullscreen d-flex align-items-center justify-content-between">
+				<div class="home-banner-content col-lg-6 col-md-6">
+					<h1>
+						Ici <br> La map mapbox
+					</h1>
+				</div>
+				<div class="banner-img col-lg-4 col-md-6">
+					<img class="img-fluid" src="img/banner-img.png" alt="">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End banner Area -->
+
+	<!-- Start fact Area -->
+	<section class="fact-area">
+		<div class="container">
+			<div class="fact-box">
+				<div class="row align-items-center">
+					<div class="col single-fact">
+						<h2>9.71%</h2>
+						<p>smape score</p>
+					</div>
+					<div class="col single-fact">
+						<h2>7.12%</h2>
+						<p>mape score</p>
+					</div>
+					<div class="col single-fact">
+						<h2>+1h</h2>
+						<p>Horizon de prédiction</p>
+					</div>
+					<div class="col single-fact">
+						<h2>jsp</h2>
+						<p>jsp jsp</p>
+					</div>
+					<div class="col single-fact">
+						<h2>jsp</h2>
+						<p>jsp jsp</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End fact Area -->
+
+	<!-- Start feature Area -->
+	<section class="feature-area section-gap-top">
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="col-lg-6">
+					<div class="section-title text-center">
+						<h2>Details des featues</h2>
+						<p>Bon alors la y a de place pour décrire ce qu'on veut
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="single-feature">
+						<a href="#" class="title">
+							<span class="lnr lnr-book"></span>
+							<h3>Expert Technicians</h3>
+						</a>
+						<p>
+							Usage of the Internet is becoming more common due to rapid advancement of technology and power.
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="single-feature">
+						<a href="#" class="title">
+							<span class="lnr lnr-book"></span>
+							<h3>Professional Service</h3>
+						</a>
+						<p>
+							Usage of the Internet is becoming more common due to rapid advancement of technology and power.
+						</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="single-feature">
+						<a href="#" class="title">
+							<span class="lnr lnr-book"></span>
+							<h3>Great Support</h3>
+						</a>
+						<p>
+							Usage of the Internet is becoming more common due to rapid advancement of technology and power.
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- End feature Area -->
+
+	<!-- Start about Area -->
+	<section class="about-area">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-5 home-about-left">
+					<!--l'image de l'iphone etait ici-->
+				</div>
+				<div class="col-lg-6 home-about-right home-about-right2">
+					<h1>
+						j'ai laissé cet espace <br>
+						au cas ou, à supprimer <br>
+						si on l'utilise pas
+					</h1>
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+						magna aliqua.Ut
+						enim ad minim. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.
+					</p>
+				</div>
+				<div class="col-lg-5 home-about-left">
+					<img class="img-fluid" src="img/iphone.png" alt="">
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End about Area -->
+
+	<!-- Start Pricing Area -->
+	<section class="pricing-area">
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="col-lg-6">
+					<div class="section-title text-center">
+						<h2>Comparaison final des algos</h2>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-4 col-md-6">
+					<div class="single-price">
+						<div class="top-sec d-flex justify-content-between">
+							<div class="top-left">
+								<h4>ARIMA</h4>
+								<p>méthode statistique <br></p>
+							</div>
+							<div class="top-right">
+								<h1>30%</h1>
+							</div>
+						</div>
+						<div class="end-sec">
+							<ul>
+								<li style="color:green;">Précis</li>
+								<li style="color:green;">Modelable</li>
+								<li style="color:red;">Lent à calculer</li>
+								<li>autres</li>
+								<li>autres</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="single-price">
+						<div class="top-sec d-flex justify-content-between">
+							<div class="top-left">
+								<h4>RNN</h4>
+								<p>Méthodes de réseaux de <br>neurones</p>
+							</div>
+							<div class="top-right">
+								<h1>11%</h1>
+							</div>
+						</div>
+						<div class="end-sec">
+							<ul>
+								<li>2.5 GB Free Photos</li>
+								<li>Secure Online Transfer Indeed</li>
+								<li>Unlimited Styles for interface</li>
+								<li>Reliable Customer Service</li>
+								<li>Manual Backup Provided</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-6">
+					<div class="single-price">
+						<div class="top-sec d-flex justify-content-between">
+							<div class="top-left">
+								<h4>LightGBM</h4>
+								<p>Méthodes de gradient  <br>boosting</p>
+							</div>
+							<div class="top-right">
+								<h1>9.71%</h1>
+							</div>
+						</div>
+						<div class="end-sec">
+							<ul>
+								<li>2.5 GB Free Photos</li>
+								<li>Secure Online Transfer Indeed</li>
+								<li>Unlimited Styles for interface</li>
+								<li>Reliable Customer Service</li>
+								<li>Manual Backup Provided</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- End Pricing Area -->
+
+	<!-- Start Footer Area -->
+	<!-- <footer class="footer-area section-gap"> -->
+		<div class="container">
+			<div class="footer-bottom row align-items-center">
+				<p class="footer-text m-0 col-lg-6 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+				<div class="col-lg-6 col-md-6 social-link">
+					<div class="download-button d-flex flex-row justify-content-end">
+						<p>machine learning model, prediction, mapbox integration made by <a href="https://github.com/jeremySrgt" target="_blank">Jérémy Surget</a> & <a href="https://github.com/Sylvainj1" target="_blank">Sylvain Jiang</a></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- </footer> -->
+	<!-- End Footer Area -->
+
+	<script type="text/javascript" src="{{ url_for('static', filename='mapbox_action.js') }}" ></script>
+  	<script type="text/javascript" src="{{ url_for('static', filename='testload.js') }}" ></script>
+  	<script type="text/javascript">var pickups_data = {{pickup_data|safe}};</script>
+
+	<script src="{{ url_for('static', filename='js/vendor/jquery-2.2.4.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/tilt.jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/easing.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/superfish.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

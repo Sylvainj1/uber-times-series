@@ -12,7 +12,7 @@ app.config.from_envvar('APP_CONFIG_FILE', silent=True)
 MAPBOX_ACCESS_KEY = app.config['MAPBOX_ACCESS_KEY']
 
 
-def create_pickups_cluster(prediction_number=5300):
+def create_pickups_cluster(prediction_number=0):
     schema = {
         "type": "FeatureCollection",
         "crs": {"type": "name", "properties": {"name": "pickups_json"}},
@@ -37,7 +37,7 @@ model_test = pickle.load(open('../models/model_lgbm.pkl','rb'))
 @app.route('/')
 def mapbox_js():
     return render_template(
-        'mapbox_js.html',
+        'html/index.html',
         ACCESS_KEY=MAPBOX_ACCESS_KEY,
         pickup_data=json.dumps(pickup_json)
     )
