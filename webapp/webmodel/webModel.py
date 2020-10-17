@@ -46,5 +46,22 @@ class WebModel:
         json_to_pass = self.create_pickups_cluster(cluster_value)
 
         return json.dumps(json_to_pass)
+
+    def get_y_test_pred(self):
+        y_test = pd.read_csv('../y_test_df.csv', index_col=0)
+        y_t = np.array(y_test['pickups'])
+        y_tt = pd.Series(y_t, index = y_test.index)
+        y_tt.index = pd.to_datetime(y_tt.index)
+
+        y_pred = self.forecast_pickups()
+        y_pred_df = pd.Series(y_pred, index = y_test.index)
+        y_pred_df.index = pd.to_datetime(y_pred_df.index)
+
+        return y_tt, y_pred_df
+
+    
+    def get_smape(self):
+        pass
+
     
 

@@ -20,6 +20,7 @@ app.config.from_envvar('APP_CONFIG_FILE', silent=True)
 
 MAPBOX_ACCESS_KEY = app.config['MAPBOX_ACCESS_KEY']
 
+model = WebModel('model_lgbm')
 
 
 @app.route('/')
@@ -57,7 +58,11 @@ def predict():
 @app.route('/myplot')
 def myplot():
     plot = figure()
-    plot.circle([1,2], [3,4])
+    y_test, y_pred = model.get_y_test_pred()
+
+    plot.line(x=y_pred.index, y=y_pred.values, line_color='red')
+    plot.line(x=y_test.index, y=y_test.values, line_color='blue')
+
     return json.dumps(json_item(plot, "myplot"))
 
 
