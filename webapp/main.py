@@ -1,8 +1,16 @@
 import numpy as np
 import pickle
 from flask import Flask, request, render_template
+from jinja2 import Template
 import json
 import pandas as pd
+
+from bokeh.plotting import figure
+from bokeh.embed import components
+from bokeh.embed import json_item
+from bokeh.resources import CDN
+from bokeh.resources import INLINE
+
 from webmodel.webModel import WebModel
 
 
@@ -32,16 +40,25 @@ def predict():
     # #si l'utilisateur veut 2h apres ca sera predictions[1] etc...
 
     selected_model = request.form.get('model_select')
+    horizon = int(request.form.get('horizon'))
     print(str(selected_model))
+    print(str(horizon))
 
     model = WebModel(selected_model)
-    cluster_data = model.create_json()
+    cluster_data = model.create_json(horizon)
 
     return render_template(
         'html/index.html',
         ACCESS_KEY=MAPBOX_ACCESS_KEY,
         pickup_data=cluster_data
     )
+
+
+@app.route('/myplot')
+def myplot():
+    plot = figure()
+    plot.circle([1,2], [3,4])
+    return json.dumps(json_item(plot, "myplot"))
 
 
 if __name__ == '__main__':

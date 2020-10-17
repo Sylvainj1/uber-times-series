@@ -3,8 +3,7 @@
   background-color: black;
   position: absolute;
   margin-top: 6%;
-
-  width: 80%;
+  width: 70%;
   height: 700px;
 }
 
@@ -16,7 +15,3 @@
   height: 100%;
 }
 
-.predict_button {
-    /* position: relative; */
-    /* margin-top: 600px; */
-}

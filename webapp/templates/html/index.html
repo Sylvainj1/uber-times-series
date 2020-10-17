@@ -28,6 +28,12 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/select-css.css')}}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
 
+	<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.2.1.min.js" integrity="sha384-qkRvDQVAIfzsJo40iRBbxt6sttt0hv4lh74DG7OK4MCHv4C5oohXYoHUM5W11uqS" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.2.1.min.js" integrity="sha384-Sb7Mr06a9TNlet/GEBeKaf5xH3eb6AlCzwjtU82wNPyDrnfoiVl26qnvlKjmcAd+" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.2.1.min.js" integrity="sha384-HaJ15vgfmcfRtB4c4YBOI4f1MUujukqInOWVqZJZZGK7Q+ivud0OKGSTn/Vm2iso" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        Bokeh.set_log_level("info");
+    </script>
 
 	<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
 	<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
@@ -92,9 +98,15 @@
 					<option value="rnn">RNN</option>
 					<option value="model_lgbm">LGBM</option>
 				</select>
+				<select name="horizon" id="mounth">
+					<option value="1">1h</option>
+					<option value="2">2h</option>
+					<option value="4">4h</option>
+					<option value="24">1 jour</option>
+					<option value="168">1 semaine</option>
+				</select>
 				<div class="predict_button">
-					<button type="submit" class="btn btn-primary btn-block btn-large">predire manhattan 1h
-						apres</button>
+					<button type="submit" class="btn btn-primary btn-block btn-large">Forecaster l'affluence</button>
 				</div>
 				</form>
 			</div>
@@ -211,6 +223,7 @@
 					<!--image de l'iphone a gauche ici-->
 				</div>
 			</div>
+			<div id="myplot"></div>
 		</div>
 	</section>
 	<!-- End about Area -->
@@ -335,6 +348,12 @@
 	<script src="{{ url_for('static', filename='js/superfish.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+	<script>
+		fetch('/myplot')
+		  .then(function(response) { return response.json(); })
+		  .then(function(item) { return Bokeh.embed.embed_item(item); })
+	</script>
 </body>
 
 </html>

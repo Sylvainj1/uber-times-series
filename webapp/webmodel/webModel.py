@@ -40,9 +40,9 @@ class WebModel:
         schema['features'] = populate_feature
         return schema
 
-    def create_json(self):
+    def create_json(self, horizon=1):
         predictions = self.forecast_pickups()
-        cluster_value = int(predictions[0])
+        cluster_value = int(predictions[horizon-1])
         json_to_pass = self.create_pickups_cluster(cluster_value)
 
         return json.dumps(json_to_pass)
