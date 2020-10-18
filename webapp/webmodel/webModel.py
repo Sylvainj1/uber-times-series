@@ -78,16 +78,55 @@ class WebModel:
         return json.dumps(json_to_pass)
 
     def get_y_test_pred(self):
-        y_test = pd.read_csv('../y_test.csv', index_col=0)
-        y_t = np.array(y_test['pickups'])
-        y_tt = pd.Series(y_t, index = y_test.index)
-        y_tt.index = pd.to_datetime(y_tt.index)
+        predictions = self.forecast_pickups()
+        if self.model == 'model_sarimax':
+            y_test = pd.read_csv('../y_test_sarimax.csv')
+            y_t = np.array(y_test['actual'])
+            y_tt = pd.Series(y_t, index = y_test.index)
+            #y_tt.index = pd.to_datetime(y_tt.index)
 
-        y_pred = self.forecast_pickups()
-        y_pred_df = pd.Series(y_pred, index = y_test.index)
-        y_pred_df.index = pd.to_datetime(y_pred_df.index)
+            y_pred = self.forecast_pickups()
+            y_pred = y_pred.reshape((720,))
+            y_pred_df = pd.Series(y_pred[:-1], index = y_test.index)
+            #y_pred_df.index = pd.to_datetime(y_pred_df.index)
+            return y_tt, y_pred_df
 
-        return y_tt, y_pred_df
+        elif self.model == 'model_lgbm':
+            y_test = pd.read_csv('../y_test_lgbm.csv', index_col=0)
+            y_t = np.array(y_test['pickups'])
+            y_tt = pd.Series(y_t, index = y_test.index)
+            y_tt.index = pd.to_datetime(y_tt.index)
+
+            y_pred = self.forecast_pickups()
+            y_pred_df = pd.Series(y_pred, index = y_test.index)
+            y_pred_df.index = pd.to_datetime(y_pred_df.index)
+            return y_tt, y_pred_df
+
+        elif self.model == 'model_naive':
+            y_test = pd.read_csv('../y_test_naive.csv')
+            y_t = np.array(y_test['pickups'])
+            y_tt = pd.Series(y_t, index = y_test.index)
+            #y_tt.index = pd.to_datetime(y_tt.index)
+
+            y_pred = self.forecast_pickups()
+            y_pred_df = pd.Series(y_pred, index = y_test.index)
+            #y_pred_df.index = pd.to_datetime(y_pred_df.index)
+            return y_tt, y_pred_df
+
+        elif self.model == 'model_prophet':
+            y_test = pd.read_csv('../y_test_prophet.csv', index_col=0)
+            y_t = np.array(y_test['pickups'])
+            y_tt = pd.Series(y_t, index = y_test.index)
+            y_tt.index = pd.to_datetime(y_tt.index)
+
+            y_pred = self.forecast_pickups()
+            y_pred_df = pd.Series(y_pred, index = y_test.index)
+            y_pred_df.index = pd.to_datetime(y_pred_df.index)
+            return y_tt, y_pred_df
+
+        else:
+            raise ValueError("Aucun des models ne correspond au model selectionné")
+
 
     def smape_perso(self,y_test, y_pred):
         return 100/len(y_test) * np.sum(2 * np.abs(y_pred - y_test) / (np.abs(y_test) + np.abs(y_pred)))
