@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 import pickle
+from sklearn.preprocessing import MinMaxScaler
 
 
 class WebModel:
@@ -13,14 +14,43 @@ class WebModel:
         return loaded_model
 
     def forecast_pickups(self):
-        features = pd.read_csv('../X_test_csv.csv')
         model = self.load_model()
         if self.model == 'model_sarimax':
-            predictions = model.forecast(len(features))
+            uber = pd.read_csv('../uber_data.csv').dropna()
+            manhattan = uber[uber['borough']=='Manhattan']
+            steps = -1
+            manhattan['actual'] = manhattan['pickups'].shift(steps)
+            sc_out = MinMaxScaler(feature_range=(0,1))
+            scaler_ouput = sc_out.fit_transform(manhattan[['actual']])
+            features = pd.read_csv('../X_test_sarimax.csv')
+            predictions = model.forecast(steps=len(features), exog=features)
+            predictions = pd.DataFrame(predictions, columns=['Forecast'])
+            
+            predictions = sc_out.inverse_transform(predictions)
+            predictions = predictions
             return predictions
-        else:
+
+        elif self.model == 'model_lgbm':
+            features = pd.read_csv('../X_test_lgbm.csv')
             predictions = model.predict(features)
             return predictions
+
+        elif self.model == 'model_naive':
+            features = pd.read_csv('../X_test_naive.csv')
+            y_test = pd.read_csv('../y_test_naive.csv')
+            fh = np.arange(1,len(y_test)+1)
+            predictions = model.predict(fh)
+            predictions = np.array(predictions)
+            return predictions
+
+        elif self.model == 'model_prophet':
+            features = pd.read_csv('../X_test_prophet.csv')
+            predictions = model.predict(features)
+            predictions = np.array(predictions['yhat'][-720:])
+            return predictions
+
+        else:
+            raise ValueError("Aucun des models ne correspond au model selectionné")
 
 
     def create_pickups_cluster(self,prediction_number=0):
@@ -48,7 +78,7 @@ class WebModel:
         return json.dumps(json_to_pass)
 
     def get_y_test_pred(self):
-        y_test = pd.read_csv('../y_test_df.csv', index_col=0)
+        y_test = pd.read_csv('../y_test.csv', index_col=0)
         y_t = np.array(y_test['pickups'])
         y_tt = pd.Series(y_t, index = y_test.index)
         y_tt.index = pd.to_datetime(y_tt.index)
@@ -59,9 +89,56 @@ class WebModel:
 
         return y_tt, y_pred_df
 
+    def smape_perso(self,y_test, y_pred):
+        return 100/len(y_test) * np.sum(2 * np.abs(y_pred - y_test) / (np.abs(y_test) + np.abs(y_pred)))
+    
+    def mape(self,y_test, y_pred): 
+        return np.mean(np.abs((y_test - y_pred) / y_test)) * 100
     
     def get_smape(self):
-        pass
+        predictions = self.forecast_pickups()
+        if self.model == 'model_sarimax':
+            y_test = pd.read_csv('../y_test_sarimax.csv')
+            predictions = predictions.reshape((720,))
+            return round(self.smape_perso(y_test['actual'],predictions[:-1]),2)
 
+        elif self.model == 'model_lgbm':
+            y_test = pd.read_csv('../y_test_lgbm.csv')
+            print(predictions.shape)
+            return round(self.smape_perso(y_test['pickups'],predictions),2)
+
+        elif self.model == 'model_naive':
+            y_test = pd.read_csv('../y_test_naive.csv')
+            return round(self.smape_perso(y_test['pickups'],predictions),2)
+
+        elif self.model == 'model_prophet':
+            y_test = pd.read_csv('../y_test_prophet.csv')
+            return round(self.smape_perso(y_test['pickups'],predictions),2)
+
+        else:
+            raise ValueError("Aucun des models ne correspond au model selectionné")
+
+    def get_mape(self):
+        predictions = self.forecast_pickups()
+        if self.model == 'model_sarimax':
+            y_test = pd.read_csv('../y_test_sarimax.csv')
+            predictions = predictions.reshape((720,))
+            return round(self.mape(y_test['actual'],predictions[:-1]),2)
+
+        elif self.model == 'model_lgbm':
+            y_test = pd.read_csv('../y_test_lgbm.csv')
+            print(predictions.shape)
+            return round(self.mape(y_test['pickups'],predictions),2)
+
+        elif self.model == 'model_naive':
+            y_test = pd.read_csv('../y_test_naive.csv')
+            return round(self.mape(y_test['pickups'],predictions),2)
+
+        elif self.model == 'model_prophet':
+            y_test = pd.read_csv('../y_test_prophet.csv')
+            return round(self.mape(y_test['pickups'],predictions),2)
+
+        else:
+            raise ValueError("Aucun des models ne correspond au model selectionné")
     
 

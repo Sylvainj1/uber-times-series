@@ -44,14 +44,21 @@ def predict():
     horizon = int(request.form.get('horizon'))
     print(str(selected_model))
     print(str(horizon))
+    model_name = selected_model.split('_')[1].capitalize()
 
     model = WebModel(selected_model)
     cluster_data = model.create_json(horizon)
+    smape_score = model.get_smape()
+    mape_score = model.get_mape()
 
     return render_template(
         'html/index.html',
         ACCESS_KEY=MAPBOX_ACCESS_KEY,
-        pickup_data=cluster_data
+        pickup_data=cluster_data,
+        smape_score = smape_score,
+        mape_score = mape_score,
+        pred_horizon = horizon,
+        model_name = model_name
     )
 
 

@@ -94,9 +94,10 @@
 			<div class="row align-items-center">
 				<form action="{{ url_for('predict')}}" method="POST">
 				<select name="model_select" id="mounth">
-					<option value="model_sarimax">ARIMA</option>
-					<option value="rnn">RNN</option>
+					<option value="model_sarimax">SARIMAX</option>
 					<option value="model_lgbm">LGBM</option>
+					<option value="model_naive">Naive</option>
+					<option value="model_prophet">Prophet</option>
 				</select>
 				<select name="horizon" id="mounth">
 					<option value="1">1h</option>
@@ -119,20 +120,20 @@
 			<div class="fact-box">
 				<div class="row align-items-center">
 					<div class="col single-fact">
-						<h2>9.71%</h2>
+						<h2>{{ smape_score }}%</h2>
 						<p>smape score</p>
 					</div>
 					<div class="col single-fact">
-						<h2>7.12%</h2>
+						<h2>{{ mape_score }}%</h2>
 						<p>mape score</p>
 					</div>
 					<div class="col single-fact">
-						<h2>+1h</h2>
-						<p>Horizon de prédiction</p>
+						<h2>{{ model_name }}</h2>
+						<p>Nom du model</p>
 					</div>
 					<div class="col single-fact">
-						<h2>jsp</h2>
-						<p>jsp jsp</p>
+						<h2>+ {{ pred_horizon }}h</h2>
+						<p>Horizon de prédiction</p>
 					</div>
 					<div class="col single-fact">
 						<h2>jsp</h2>
