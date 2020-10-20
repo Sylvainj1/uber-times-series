@@ -4,9 +4,9 @@ mapboxgl.accessToken =
 
 var map = new mapboxgl.Map({
   container: "map", // container id
-  style: "mapbox://styles/mapbox/dark-v10", // style URL
-  center: [-73.968565, 40.779897], // starting position [lng, lat]
-  zoom: 11, // starting zoom
+  style: "mapbox://styles/mapbox/dark-v10", 
+  center: [-73.968565, 40.779897], 
+  zoom: 10, 
 });
 
 map.on("load", function () {
@@ -15,15 +15,12 @@ map.on("load", function () {
   // add the point_count property to your source data.
   map.addSource("pickups", {
     type: "geojson",
-    // Point to GeoJSON data. This example visualizes all M1.0+ pickups
-    // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
     data: pickups_data,
     cluster: true,
     clusterMaxZoom: 14, // Max zoom to cluster points on
     clusterRadius: 50, // Radius of each cluster when clustering points (defaults to 50)
   });
   map.on('error', e => {
-    // Hide those annoying non-error errors
     if (e && e.error !== 'Error: Not Found')
         console.error(e);
 });
@@ -34,11 +31,6 @@ map.on("load", function () {
     source: "pickups",
     filter: ["has", "point_count"],
     paint: {
-      // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
-      // with three steps to implement three types of circles:
-      //   * Blue, 20px circles when point count is less than 100
-      //   * Yellow, 30px circles when point count is between 100 and 750
-      //   * Pink, 40px circles when point count is greater than or equal to 750
       "circle-color": [
         "step",
         ["get", "point_count"],
