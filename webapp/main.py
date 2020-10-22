@@ -59,7 +59,7 @@ def predict():
 @app.route('/myplot', methods=['GET','POST'])
 def myplot():
     data = request.get_json()
-    plot = figure()
+    plot = figure(plot_width=1400, plot_height=500)
     model = WebModel(data['model'])
     y_test, y_pred = model.get_y_test_pred()
 
